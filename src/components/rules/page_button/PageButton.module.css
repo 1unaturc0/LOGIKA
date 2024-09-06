@@ -1,0 +1,22 @@
+.pageBtn {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  font-size: 50px;
+}
+
+.pageBtn div {
+  text-shadow: 0 3px black;
+}
+
+@media screen and (max-width: 600px) {
+  .pageBtn {
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .pageBtn {
+    font-size: 30px;
+  }
+}

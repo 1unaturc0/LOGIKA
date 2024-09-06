@@ -1,0 +1,118 @@
+.settingsSlider {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  padding: 5px 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: #5a2c1b;
+  border-radius: 25px;
+  box-shadow: inset 0 3px 3px black;
+  text-shadow: none;
+  font-size: inherit;
+  user-select: none;
+}
+
+.settingsSlider p {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.active {
+  border: 3px solid white;
+}
+
+.active::before {
+  content: "";
+  position: absolute;
+  left: -2.9px;
+  top: -3px;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-radius: 25px;
+  box-shadow: 0 3px grey;
+}
+
+.line {
+  align-self: center;
+  position: relative;
+  height: 5px;
+  width: 90%;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border-radius: 2.5px;
+  background-color: #f3ca52;
+  box-shadow: inset 0 1px 1px black;
+  font-size: 1rem;
+}
+
+.ends {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.end {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #f3ca52;
+  box-shadow: inset 0 2px 1px black;
+  z-index: 0;
+}
+
+.infinity {
+  composes: end;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-color: #9f7d17;
+}
+
+.line span {
+  position: relative;
+  top: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+.infinity span {
+  top: 27px;
+}
+
+.grip {
+  position: absolute;
+  left: -5px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #7aba78;
+  box-shadow: 0 1px 5px black;
+  z-index: 1;
+}
+
+.grip::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: radial-gradient(rgba(243, 202, 82, 0.7), transparent);
+}
+
+.grip:hover {
+  filter: brightness(70%);
+  cursor: grab;
+}
+
+@media screen and (max-width: 500px) {
+  .settingsSlider {
+    font-size: 1.3rem;
+  }
+}

@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  color: inherit;
+}
+
+body {
+  background-color: #0a6847;
+  color: white;
+  font-family: "SUSE", sans-serif;
+  user-select: none;
+}
+
+button {
+  transition: filter 0.3s ease-in-out;
+}
+
+button:hover {
+  filter: brightness(70%);
+  cursor: pointer;
+}

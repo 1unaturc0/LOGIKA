@@ -1,0 +1,107 @@
+.cell {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  border-radius: 50%;
+  box-shadow: 0 3px 3px black;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: 0;
+  user-select: none;
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  left: -2.5px;
+  top: -2.5px;
+  width: 100%;
+  height: 100%;
+  border: 3px solid #f3ca52;
+  border-radius: 50%;
+}
+
+.empty {
+  box-shadow: inset 0 1px 1px black;
+}
+
+.empty::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 6px);
+  top: calc(50% - 6px);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #00100b;
+  box-shadow: 0 1px 2px black;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.yellow {
+  background-color: yellow;
+  color: black;
+}
+
+.orange {
+  background-color: orangered;
+}
+
+.brown {
+  background-color: brown;
+}
+
+.white {
+  background-color: white;
+  color: black;
+}
+
+.black {
+  background-color: black;
+}
+
+.red::before,
+.green::before,
+.blue::before,
+.yellow::before,
+.orange::before,
+.brown::before,
+.white::before,
+.black::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.3), transparent);
+}
+
+.black::before {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.15), transparent);
+}
+
+@media screen and (max-width: 500px) {
+  .cell {
+    width: 25px;
+    min-width: 25px;
+    height: 25px;
+    font-size: 17px;
+    line-height: 25px;
+  }
+}

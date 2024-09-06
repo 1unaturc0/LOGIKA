@@ -1,0 +1,29 @@
+{
+  "main": {
+    "playButton": "Play",
+    "settingsButton": "Settings",
+    "rulesButton": "Rules"
+  },
+  "settings": {
+    "title": "Settings",
+    "emptyCellsButton": "Empty cells",
+    "colorNumerationButton": "Color numeration",
+    "turnTimeSlider": "Turn time: "
+  },
+  "rules": {
+    "title": "Rules",
+    "pages": [
+      "Guess the combination of 5 colored cells. There are 8 possible variations of colors.",
+      "You can make your assumptions up to 12 times. After each attempt you will see how close you are to the correct answer.",
+      "White pin shows that you have guessed the color but not the position of one cell.",
+      "Black pin means that a cell has matched both by color and position.",
+      "Placements of pins do not correlate with placements of cells."
+    ]
+  },
+  "game": {
+    "cipher": "CIPHER"
+  },
+  "modalWindow": {
+    "confirmReturn": "Do you actually want to return to the menu?"
+  }
+}
