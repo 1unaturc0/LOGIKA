@@ -38,9 +38,10 @@ export const gameSlice = createSlice({
         JSON.stringify(state.cells[state.activeCellRow]) !==
           JSON.stringify(state.cipher) &&
         state.activeCell.row !== 11
-      )
+      ) {
         state.activeCell.row++;
-      else {
+        state.activeCell.column = 0;
+      } else {
         state.activeCell.column = null;
         state.isGameOver = true;
       }

@@ -18,10 +18,9 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-    debug: true,
     backend: {
-      loadPath: "locales/{{lng}}/{{ns}}.json"
-    }
+      loadPath: "locales/{{lng}}/{{ns}}.json",
+    },
   });
 
 export default i18n;

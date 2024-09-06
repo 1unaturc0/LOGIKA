@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FaCog, FaPlay, FaScroll } from "react-icons/fa";
 import { useActions } from "#/hooks/useActions";
+import { isDesktopCheck } from "#/utils/isDesktopCheck";
 import MainButton from "#/components/main/main_button/MainButton";
 import styles from "./Main.module.css";
 
@@ -9,6 +10,12 @@ const Main = () => {
   const [activeButton, setActiveButton] = useState(1);
   const { changeTab } = useActions();
   const { t } = useTranslation();
+  const [activeIconClassName, setActiveIconClassName] = useState("");
+
+  useEffect(() => {
+    if (isDesktopCheck()) setActiveIconClassName(styles.activeIcon);
+    else setActiveIconClassName(styles.icon);
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (e) => {
@@ -36,7 +43,7 @@ const Main = () => {
         onClick={() => changeTab("settings")}
       >
         <FaCog
-          className={activeButton === 0 ? styles.activeIcon : styles.icon}
+          className={activeButton === 0 ? activeIconClassName : styles.icon}
         />
       </MainButton>
       <MainButton
@@ -45,7 +52,7 @@ const Main = () => {
         onClick={() => changeTab("game")}
       >
         <FaPlay
-          className={activeButton === 1 ? styles.activeIcon : styles.icon}
+          className={activeButton === 1 ? activeIconClassName : styles.icon}
         />
       </MainButton>
       <MainButton
@@ -54,7 +61,7 @@ const Main = () => {
         onClick={() => changeTab("rules")}
       >
         <FaScroll
-          className={activeButton === 2 ? styles.activeIcon : styles.icon}
+          className={activeButton === 2 ? activeIconClassName : styles.icon}
         />
       </MainButton>
     </nav>

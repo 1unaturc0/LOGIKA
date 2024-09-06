@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
+import { isDesktopCheck } from "#/utils/isDesktopCheck";
 import styles from "./SettingsSlider.module.css";
 
 const SettingsSlider = ({ content, active, onChange }) => {
   const [value, setValue] = useState(content.initialValue);
+  const [className, setClassName] = useState("");
   const minEndRef = useRef(null);
   const maxEndRef = useRef(null);
   const infinityRef = useRef(null);
@@ -10,7 +12,10 @@ const SettingsSlider = ({ content, active, onChange }) => {
 
   const valueRange = content.maxValue - content.minValue;
 
-  const onGripMouseDown = (e) => {
+  const onDragStart = (e) => {
+    const isDesktop = isDesktopCheck();
+    const clientX = e.clientX ?? e.touches[0].clientX;
+
     const minEnd = minEndRef.current;
     const maxEnd = maxEndRef.current;
     const endsRange =
@@ -26,11 +31,12 @@ const SettingsSlider = ({ content, active, onChange }) => {
     const minGripLeft = minEnd.offsetWidth / 2 - gripRadius;
     const maxGripLeft = endsRange - gripRadius - maxEnd.offsetWidth / 2;
     const sliderRange = maxGripLeft - minGripLeft;
-    const shift = e.clientX - grip.getBoundingClientRect().left;
+    const shift = clientX - grip.getBoundingClientRect().left;
     const gripCenter = grip.offsetLeft + gripRadius;
 
-    document.onmousemove = (e) => {
-      let newGripLeft = e.clientX - minEnd.getBoundingClientRect().left - shift;
+    const onDragMove = (e) => {
+      const clientX = e.clientX ?? e.touches[0].clientX;
+      let newGripLeft = clientX - minEnd.getBoundingClientRect().left - shift;
       if (newGripLeft < minGripLeft) newGripLeft = minGripLeft;
       if (
         newGripLeft > maxGripLeft &&
@@ -42,7 +48,7 @@ const SettingsSlider = ({ content, active, onChange }) => {
       grip.style.left = `${newGripLeft}px`;
     };
 
-    document.onmouseup = () => {
+    const onDragEnd = () => {
       let newValue = Math.round(
         content.minValue +
           (valueRange / sliderRange) * (grip.offsetLeft - minGripLeft)
@@ -52,8 +58,31 @@ const SettingsSlider = ({ content, active, onChange }) => {
       onChange(newValue);
       document.onmousemove = null;
       document.onmouseup = null;
+      document.ontouchmove = null;
+      document.ontouchend = null;
     };
+
+    if (isDesktop) {
+      document.onmousemove = onDragMove;
+      document.onmouseup = onDragEnd;
+    } else {
+      document.ontouchmove = onDragMove;
+      document.ontouchend = onDragEnd;
+    }
   };
+
+  useEffect(() => {
+    if (active && isDesktopCheck())
+      setClassName(`${styles.settingsSlider} ${styles.active}`);
+    else setClassName(styles.settingsSlider);
+  }, [active]);
+
+  useEffect(() => {
+    const isDesktop = isDesktopCheck();
+
+    if (isDesktop) gripRef.current.onmousedown = onDragStart;
+    else gripRef.current.ontouchstart = onDragStart;
+  });
 
   useEffect(() => {
     if (!active) return;
@@ -107,12 +136,7 @@ const SettingsSlider = ({ content, active, onChange }) => {
   });
 
   return (
-    <div
-      className={`
-                ${styles.settingsSlider} \
-                ${active && styles.active}
-            `}
-    >
+    <div className={className}>
       <p>
         {content.text}
         {value === Infinity ? "Ꝏ" : value}
@@ -126,11 +150,7 @@ const SettingsSlider = ({ content, active, onChange }) => {
             <span>{content.maxValue}</span>
           </div>
         </div>
-        <div
-          ref={gripRef}
-          onMouseDown={onGripMouseDown}
-          className={styles.grip}
-        />
+        <div ref={gripRef} className={styles.grip} />
         {content.allowInfinity && (
           <div ref={infinityRef} className={styles.infinity}>
             <span>Ꝏ</span>

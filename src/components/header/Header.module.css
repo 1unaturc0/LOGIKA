@@ -27,6 +27,12 @@
   top: 7px;
 }
 
+@media screen and (max-width: 600px) {
+  .returnBtn {
+    top: 14px;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .header span {
     display: none;
@@ -36,5 +42,9 @@
 @media screen and (max-height: 650px) {
   .header > * {
     font-size: 2rem;
+  }
+
+  .returnBtn {
+    top: 3px;
   }
 }

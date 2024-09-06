@@ -20,7 +20,7 @@ const Rules = () => {
   };
 
   const pages = pagesContent.map((content, i) => (
-    <RulesPage key={i} text={content.text}>
+    <RulesPage key={i} text={content.text} onClick={onNextButtonClick}>
       {content.illustration}
     </RulesPage>
   ));

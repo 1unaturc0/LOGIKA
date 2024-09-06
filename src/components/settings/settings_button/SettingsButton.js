@@ -1,8 +1,17 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaCheck, FaXmark } from "react-icons/fa6";
+import { isDesktopCheck } from "#/utils/isDesktopCheck";
 import styles from "./SettingsButton.module.css";
 
 const SettingsButton = ({ content, checked, active, onClick }) => {
+  const [className, setClassName] = useState("");
+
+  useEffect(() => {
+    if (active && isDesktopCheck())
+      setClassName(`${styles.settingsBtn} ${styles.active}`);
+    else setClassName(styles.settingsBtn);
+  }, [active]);
+
   useEffect(() => {
     if (!active) return;
 
@@ -15,13 +24,7 @@ const SettingsButton = ({ content, checked, active, onClick }) => {
   });
 
   return (
-    <button
-      className={`
-                ${styles.settingsBtn} \
-                ${active && styles.active}
-            `}
-      onClick={onClick}
-    >
+    <button className={className} onClick={onClick}>
       {checked ? (
         <FaCheck className={styles.icon} />
       ) : (

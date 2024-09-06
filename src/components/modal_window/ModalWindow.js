@@ -28,10 +28,14 @@ const ModalWindow = ({ text, onConfirmButtonClick, onDeclineButtonClick }) => {
     <div
       ref={modalWindowRef}
       tabIndex={0}
+      onClick={(e) => {
+        e.stopPropagation();
+        onDeclineButtonClick();
+      }}
       onKeyDown={onKeyDown}
       className={styles.modalWindow}
     >
-      <div className={styles.content}>
+      <div onClick={(e) => e.stopPropagation()} className={styles.content}>
         <h4>{text}</h4>
         <div className={styles.btns}>
           <ModalWindowButton
