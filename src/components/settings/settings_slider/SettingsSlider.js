@@ -12,6 +12,8 @@ const SettingsSlider = ({ content, active, onChange }) => {
 
   const valueRange = content.maxValue - content.minValue;
 
+  let newValue = value;
+
   const onDragStart = (e) => {
     const isDesktop = isDesktopCheck();
     const clientX = e.clientX ?? e.touches[0].clientX;
@@ -46,15 +48,16 @@ const SettingsSlider = ({ content, active, onChange }) => {
       if (newGripLeft > endsRange + (infinityCenter - gripCenter) / 3)
         newGripLeft = infinityCenter - gripRadius;
       grip.style.left = `${newGripLeft}px`;
-    };
 
-    const onDragEnd = () => {
-      let newValue = Math.round(
+      newValue = Math.round(
         content.minValue +
           (valueRange / sliderRange) * (grip.offsetLeft - minGripLeft)
       );
       if (newValue > content.maxValue) newValue = Infinity;
       setValue(newValue);
+    };
+
+    const onDragEnd = () => {
       onChange(newValue);
       document.onmousemove = null;
       document.onmouseup = null;
