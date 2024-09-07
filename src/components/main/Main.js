@@ -33,7 +33,7 @@ const Main = () => {
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  });
+  }, [activeButton]);
 
   return (
     <nav className={styles.main}>

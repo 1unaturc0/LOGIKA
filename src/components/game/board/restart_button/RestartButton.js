@@ -7,30 +7,25 @@ import styles from "./RestartButton.module.css";
 const RestartButton = () => {
   const areEmptyCells = useSelector((state) => state.settings.areEmptyCells);
   const { initializeGame } = useActions();
-
-  const onClick = () => {
-    initializeGame(
-      areEmptyCells
-        ? [
-            Math.floor(Math.random() * 9),
-            Math.floor(Math.random() * 9),
-            Math.floor(Math.random() * 9),
-            Math.floor(Math.random() * 9),
-            Math.floor(Math.random() * 9),
-          ]
-        : [
-            Math.floor(Math.random() * 8 + 1),
-            Math.floor(Math.random() * 8 + 1),
-            Math.floor(Math.random() * 8 + 1),
-            Math.floor(Math.random() * 8 + 1),
-            Math.floor(Math.random() * 8 + 1),
-          ]
-    );
-  };
+  const newCipher = areEmptyCells
+    ? [
+        Math.floor(Math.random() * 9),
+        Math.floor(Math.random() * 9),
+        Math.floor(Math.random() * 9),
+        Math.floor(Math.random() * 9),
+        Math.floor(Math.random() * 9),
+      ]
+    : [
+        Math.floor(Math.random() * 8 + 1),
+        Math.floor(Math.random() * 8 + 1),
+        Math.floor(Math.random() * 8 + 1),
+        Math.floor(Math.random() * 8 + 1),
+        Math.floor(Math.random() * 8 + 1),
+      ];
 
   useEffect(() => {
     const onKeyDown = (e) => {
-      if (e.key === "r") onClick();
+      if (e.key === "r") initializeGame(newCipher);
     };
 
     document.addEventListener("keydown", onKeyDown);
@@ -38,7 +33,10 @@ const RestartButton = () => {
   });
 
   return (
-    <button onClick={onClick} className={styles.restartBtn}>
+    <button
+      onClick={() => initializeGame(newCipher)}
+      className={styles.restartBtn}
+    >
       <FaUndo />
     </button>
   );

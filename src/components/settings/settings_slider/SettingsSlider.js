@@ -12,68 +12,6 @@ const SettingsSlider = ({ content, active, onChange }) => {
 
   const valueRange = content.maxValue - content.minValue;
 
-  let newValue = value;
-
-  const onDragStart = (e) => {
-    const isDesktop = isDesktopCheck();
-    const clientX = e.clientX ?? e.touches[0].clientX;
-
-    const minEnd = minEndRef.current;
-    const maxEnd = maxEndRef.current;
-    const endsRange =
-      maxEnd.getBoundingClientRect().right -
-      minEnd.getBoundingClientRect().left;
-
-    const infinityCenter =
-      infinityRef.current.offsetLeft + infinityRef.current.offsetWidth / 2;
-
-    const grip = gripRef.current;
-    const gripRadius = grip.offsetWidth / 2;
-
-    const minGripLeft = minEnd.offsetWidth / 2 - gripRadius;
-    const maxGripLeft = endsRange - gripRadius - maxEnd.offsetWidth / 2;
-    const sliderRange = maxGripLeft - minGripLeft;
-    const shift = clientX - grip.getBoundingClientRect().left;
-    const gripCenter = grip.offsetLeft + gripRadius;
-
-    const onDragMove = (e) => {
-      const clientX = e.clientX ?? e.touches[0].clientX;
-      let newGripLeft = clientX - minEnd.getBoundingClientRect().left - shift;
-      if (newGripLeft < minGripLeft) newGripLeft = minGripLeft;
-      if (
-        newGripLeft > maxGripLeft &&
-        newGripLeft < endsRange + (infinityCenter - gripCenter) / 3
-      )
-        newGripLeft = maxGripLeft;
-      if (newGripLeft > endsRange + (infinityCenter - gripCenter) / 3)
-        newGripLeft = infinityCenter - gripRadius;
-      grip.style.left = `${newGripLeft}px`;
-
-      newValue = Math.round(
-        content.minValue +
-          (valueRange / sliderRange) * (grip.offsetLeft - minGripLeft)
-      );
-      if (newValue > content.maxValue) newValue = Infinity;
-      setValue(newValue);
-    };
-
-    const onDragEnd = () => {
-      onChange(newValue);
-      document.onmousemove = null;
-      document.onmouseup = null;
-      document.ontouchmove = null;
-      document.ontouchend = null;
-    };
-
-    if (isDesktop) {
-      document.onmousemove = onDragMove;
-      document.onmouseup = onDragEnd;
-    } else {
-      document.ontouchmove = onDragMove;
-      document.ontouchend = onDragEnd;
-    }
-  };
-
   useEffect(() => {
     if (active && isDesktopCheck())
       setClassName(`${styles.settingsSlider} ${styles.active}`);
@@ -82,6 +20,66 @@ const SettingsSlider = ({ content, active, onChange }) => {
 
   useEffect(() => {
     const isDesktop = isDesktopCheck();
+    let newValue = value;
+
+    const onDragStart = (e) => {
+      const clientX = e.clientX ?? e.touches[0].clientX;
+
+      const minEnd = minEndRef.current;
+      const maxEnd = maxEndRef.current;
+      const endsRange =
+        maxEnd.getBoundingClientRect().right -
+        minEnd.getBoundingClientRect().left;
+
+      const infinityCenter =
+        infinityRef.current.offsetLeft + infinityRef.current.offsetWidth / 2;
+
+      const grip = gripRef.current;
+      const gripRadius = grip.offsetWidth / 2;
+
+      const minGripLeft = minEnd.offsetWidth / 2 - gripRadius;
+      const maxGripLeft = endsRange - gripRadius - maxEnd.offsetWidth / 2;
+      const sliderRange = maxGripLeft - minGripLeft;
+      const shift = clientX - grip.getBoundingClientRect().left;
+      const gripCenter = grip.offsetLeft + gripRadius;
+
+      const onDragMove = (e) => {
+        const clientX = e.clientX ?? e.touches[0].clientX;
+        let newGripLeft = clientX - minEnd.getBoundingClientRect().left - shift;
+        if (newGripLeft < minGripLeft) newGripLeft = minGripLeft;
+        if (
+          newGripLeft > maxGripLeft &&
+          newGripLeft < endsRange + (infinityCenter - gripCenter) / 3
+        )
+          newGripLeft = maxGripLeft;
+        if (newGripLeft > endsRange + (infinityCenter - gripCenter) / 3)
+          newGripLeft = infinityCenter - gripRadius;
+        grip.style.left = `${newGripLeft}px`;
+
+        newValue = Math.round(
+          content.minValue +
+            (valueRange / sliderRange) * (grip.offsetLeft - minGripLeft)
+        );
+        if (newValue > content.maxValue) newValue = Infinity;
+        setValue(newValue);
+      };
+
+      const onDragEnd = () => {
+        onChange(newValue);
+        document.onmousemove = null;
+        document.onmouseup = null;
+        document.ontouchmove = null;
+        document.ontouchend = null;
+      };
+
+      if (isDesktop) {
+        document.onmousemove = onDragMove;
+        document.onmouseup = onDragEnd;
+      } else {
+        document.ontouchmove = onDragMove;
+        document.ontouchend = onDragEnd;
+      }
+    };
 
     if (isDesktop) gripRef.current.onmousedown = onDragStart;
     else gripRef.current.ontouchstart = onDragStart;
@@ -136,7 +134,7 @@ const SettingsSlider = ({ content, active, onChange }) => {
       content.initialValue === Infinity
         ? `${infinityCenter - gripRadius}px`
         : `${initialGripLeft}px`;
-  });
+  }, [content.initialValue, content.minValue, value, valueRange]);
 
   return (
     <div className={className}>

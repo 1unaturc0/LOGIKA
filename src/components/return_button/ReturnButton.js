@@ -26,12 +26,13 @@ const ReturnButton = () => {
 
   useEffect(() => {
     const onKeyDown = (e) => {
-      if (e.key === "Escape") onClick();
+      if (currentTab === "game" && e.key === "Escape") setIsModalShown(true);
+      else if (e.key === "Escape") changeTab("game");
     };
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  });
+  }, [changeTab, currentTab]);
 
   return (
     <button onClick={onClick} className={styles.returnBtn}>

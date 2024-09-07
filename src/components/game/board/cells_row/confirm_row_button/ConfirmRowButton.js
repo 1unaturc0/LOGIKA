@@ -15,15 +15,16 @@ const ConfirmRowButton = () => {
   };
 
   useEffect(() => {
-    if (activeCell.column !== null) return;
+    if (activeCell.column !== null || !enabled) return;
 
     const onKeyDown = (e) => {
-      if (e.key === "Enter" || e.key === "w" || e.key === "ArrowUp") onClick();
+      if (e.key === "Enter" || e.key === "w" || e.key === "ArrowUp")
+        confirmRow();
     };
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  });
+  }, [confirmRow, activeCell.column, enabled]);
 
   return (
     <button

@@ -60,7 +60,7 @@ const Settings = () => {
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  });
+  }, [activeSetting]);
 
   return (
     <div className={styles.settings}>

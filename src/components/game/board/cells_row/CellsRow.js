@@ -19,34 +19,40 @@ const CellsRow = ({ number }) => {
         activeCell.column === null &&
         (e.key === "d" || e.key === "ArrowRight")
       )
-        onCellClick(activeCell.row, 0);
+        changeActiveCell({ row: activeCell.row, column: 0 });
       if (
         activeCell.column !== null &&
         activeCell.column < 4 &&
         (e.key === "d" || e.key === "ArrowRight")
       )
-        onCellClick(activeCell.row, activeCell.column + 1);
+        changeActiveCell({
+          row: activeCell.row,
+          column: activeCell.column + 1,
+        });
       if (
         activeCell.column === null &&
         (e.key === "a" || e.key === "ArrowLeft")
       )
-        onCellClick(activeCell.row, 4);
+        changeActiveCell({ row: activeCell.row, column: 4 });
       if (activeCell.column > 0 && (e.key === "a" || e.key === "ArrowLeft"))
-        onCellClick(activeCell.row, activeCell.column - 1);
+        changeActiveCell({
+          row: activeCell.row,
+          column: activeCell.column - 1,
+        });
       if (activeCell.column === 4 && (e.key === "d" || e.key === "ArrowRight"))
-        onCellClick(activeCell.row, null);
+        changeActiveCell({ row: activeCell.row, column: null });
       if (activeCell.column === 0 && (e.key === "a" || e.key === "ArrowLeft"))
-        onCellClick(activeCell.row, null);
+        changeActiveCell({ row: activeCell.row, column: null });
       if (
         activeCell.column !== null &&
         (e.key === "Enter" || e.key === "w" || e.key === "ArrowUp")
       )
-        onCellClick(activeCell.row, null);
+        changeActiveCell({ row: activeCell.row, column: null });
     };
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  });
+  }, [changeActiveCell, activeCell.row, activeCell.column]);
 
   return (
     <div className={styles.cellsRow}>

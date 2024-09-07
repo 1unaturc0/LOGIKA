@@ -27,13 +27,18 @@ const Rules = () => {
 
   useEffect(() => {
     const onKeyDown = (e) => {
-      if (e.key === "ArrowDown" || e.key === "s") onNextButtonClick();
-      if (e.key === "ArrowUp" || e.key === "w") onPreviousButtonClick();
+      if (
+        currentPage < pagesContent.length - 1 &&
+        (e.key === "ArrowDown" || e.key === "s")
+      )
+        setCurrentPage(currentPage + 1);
+      if (currentPage > 0 && (e.key === "ArrowUp" || e.key === "w"))
+        setCurrentPage(currentPage - 1);
     };
 
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  });
+  }, [currentPage]);
 
   return (
     <div className={styles.rules}>
