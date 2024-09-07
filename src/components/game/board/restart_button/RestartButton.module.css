@@ -19,3 +19,9 @@
 .restartBtn:hover {
   filter: brightness(90%);
 }
+
+@media screen and (max-height: 650px) {
+  .restartBtn {
+    top: 13px;
+  }
+}

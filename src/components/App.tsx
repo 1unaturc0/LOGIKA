@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { RiEmotionSadLine } from "react-icons/ri";
 import { useActions } from "#/hooks/useActions";
 import { getCookie } from "#/utils/cookies";
 import { RootState } from "#/redux/store";
@@ -11,8 +13,13 @@ import Game from "#/components/game/Game";
 import styles from "./App.module.css";
 
 const App = () => {
+  const [screenSize, setScreenSize] = useState({
+    width: 0,
+    height: 0,
+  });
   const currentTab = useSelector((state: RootState) => state.tab.currentTab);
   const { initializeSettings } = useActions();
+  const { t } = useTranslation();
 
   useEffect(() => {
     initializeSettings({
@@ -26,16 +33,32 @@ const App = () => {
     });
   }, [initializeSettings]);
 
+  useEffect(() => {
+    setScreenSize({
+      width: window.screen.availWidth,
+      height: window.screen.availHeight,
+    });
+  }, []);
+
   return (
     <div className={styles.app}>
-      <Header />
-      {currentTab === "game" ? (
-        <Game />
+      {screenSize.width >= 350 && screenSize.height >= 600 ? (
+        <>
+          <Header />
+          {currentTab === "game" ? (
+            <Game />
+          ) : (
+            <div className={styles.menu}>
+              {currentTab === "main" && <Main />}
+              {currentTab === "settings" && <Settings />}
+              {currentTab === "rules" && <Rules />}
+            </div>
+          )}
+        </>
       ) : (
-        <div className={styles.menu}>
-          {currentTab === "main" && <Main />}
-          {currentTab === "settings" && <Settings />}
-          {currentTab === "rules" && <Rules />}
+        <div className={styles.smallScreen}>
+          <h4>{t("smallScreen")}</h4>
+          <RiEmotionSadLine className={styles.smallScreenIcon} />
         </div>
       )}
     </div>

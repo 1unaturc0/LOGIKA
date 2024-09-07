@@ -50,3 +50,9 @@
     line-height: 25px;
   }
 }
+
+@media screen and (max-height: 650px) {
+  .turnTime {
+    top: 13px;
+  }
+}

@@ -21,6 +21,26 @@
   letter-spacing: 0.3rem;
 }
 
+.smallScreen {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 2rem;
+  letter-spacing: 0.1rem;
+  text-align: center;
+}
+
+.smallScreenIcon {
+  font-size: 100px;
+}
+
 @media screen and (max-width: 700px) {
   .menu {
     width: 100%;
