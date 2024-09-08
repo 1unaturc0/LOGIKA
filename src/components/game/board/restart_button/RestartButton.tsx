@@ -6,43 +6,41 @@ import { RootState } from "#/redux/store";
 import styles from "./RestartButton.module.css";
 
 const RestartButton = () => {
-  const areEmptyCells = useSelector(
-    (state: RootState) => state.settings.areEmptyCells
-  );
-  const { initializeGame } = useActions();
-  const newCipher = areEmptyCells
-    ? [
-        Math.floor(Math.random() * 9),
-        Math.floor(Math.random() * 9),
-        Math.floor(Math.random() * 9),
-        Math.floor(Math.random() * 9),
-        Math.floor(Math.random() * 9),
-      ]
-    : [
-        Math.floor(Math.random() * 8 + 1),
-        Math.floor(Math.random() * 8 + 1),
-        Math.floor(Math.random() * 8 + 1),
-        Math.floor(Math.random() * 8 + 1),
-        Math.floor(Math.random() * 8 + 1),
-      ];
+	const areEmptyCells = useSelector((state: RootState) => state.settings.areEmptyCells);
+	const { initializeGame } = useActions();
+	const newCipher = areEmptyCells
+		? [
+				Math.floor(Math.random() * 9),
+				Math.floor(Math.random() * 9),
+				Math.floor(Math.random() * 9),
+				Math.floor(Math.random() * 9),
+				Math.floor(Math.random() * 9),
+		  ]
+		: [
+				Math.floor(Math.random() * 8 + 1),
+				Math.floor(Math.random() * 8 + 1),
+				Math.floor(Math.random() * 8 + 1),
+				Math.floor(Math.random() * 8 + 1),
+				Math.floor(Math.random() * 8 + 1),
+		  ];
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "r") initializeGame(newCipher);
-    };
+	useEffect(() => {
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "r") initializeGame(newCipher);
+		};
 
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  });
+		document.addEventListener("keydown", onKeyDown);
+		return () => document.removeEventListener("keydown", onKeyDown);
+	});
 
-  return (
-    <button
-      onClick={() => initializeGame(newCipher)}
-      className={styles.restartBtn}
-    >
-      <FaUndo />
-    </button>
-  );
+	return (
+		<button
+			onClick={() => initializeGame(newCipher)}
+			className={styles.restartBtn}
+		>
+			<FaUndo />
+		</button>
+	);
 };
 
 export default RestartButton;

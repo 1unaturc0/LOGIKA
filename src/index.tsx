@@ -8,11 +8,11 @@ import "./index.css";
 
 const root = createRoot(document.getElementById("root")!);
 root.render(
-  <StrictMode>
-    <Suspense>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </Suspense>
-  </StrictMode>
+	<StrictMode>
+		<Suspense>
+			<Provider store={store}>
+				<App />
+			</Provider>
+		</Suspense>
+	</StrictMode>
 );

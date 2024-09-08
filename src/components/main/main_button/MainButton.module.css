@@ -1,21 +1,21 @@
 .mainBtn {
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  border: none;
-  font-size: 2.2rem;
-  letter-spacing: 0.2rem;
+	height: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	border: none;
+	font-size: 2.2rem;
+	letter-spacing: 0.2rem;
 }
 
 .active {
-  font-size: 2.5rem;
+	font-size: 2.5rem;
 }
 
 @media screen and (max-width: 600px) {
-  .mainBtn {
-    font-size: 0;
-  }
+	.mainBtn {
+		font-size: 0;
+	}
 }

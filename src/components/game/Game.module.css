@@ -1,18 +1,18 @@
 .game {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 @media screen and (max-width: 500px) {
-    .game {
-        margin-bottom: 70px;
-    }
+	.game {
+		margin-bottom: 70px;
+	}
 }
 
 @media screen and (max-width: 400px) {
-    .game {
-        margin-bottom: 100px;
-    }
+	.game {
+		margin-bottom: 100px;
+	}
 }

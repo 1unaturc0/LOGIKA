@@ -1,58 +1,58 @@
 .rules {
-  height: 100%;
-  display: grid;
-  grid-template-rows: 100px 1fr;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-areas:
-    "returnBtn header pageBtns"
-    "returnBtn rulesPages pageBtns";
-  place-items: center;
-  text-shadow: 0 1px black;
+	height: 100%;
+	display: grid;
+	grid-template-rows: 100px 1fr;
+	grid-template-columns: 1fr 3fr 1fr;
+	grid-template-areas:
+		"returnBtn header pageBtns"
+		"returnBtn rulesPages pageBtns";
+	place-items: center;
+	text-shadow: 0 1px black;
 }
 
 .rules h1 {
-  grid-area: header;
+	grid-area: header;
 }
 
 .returnBtn {
-  grid-area: returnBtn;
+	grid-area: returnBtn;
 }
 
 .pageBtns {
-  grid-area: pageBtns;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	grid-area: pageBtns;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 @media screen and (max-width: 600px) {
-  .rules {
-    grid-template-columns: 1fr 5fr 1fr;
-  }
+	.rules {
+		grid-template-columns: 1fr 5fr 1fr;
+	}
 }
 
 @media screen and (max-width: 500px) {
-  .rules {
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-areas:
-      "returnBtn header pageBtns"
-      "rulesPages rulesPages rulesPages";
-  }
+	.rules {
+		grid-template-columns: 1fr auto 1fr;
+		grid-template-areas:
+			"returnBtn header pageBtns"
+			"rulesPages rulesPages rulesPages";
+	}
 
-  .pageBtns {
-    font-size: 12px;
-  }
+	.pageBtns {
+		font-size: 12px;
+	}
 }
 
 @media screen and (max-width: 400px) {
-  .rules {
-    grid-template-columns: 1fr auto auto 1fr;
-    grid-template-areas:
-      "returnBtn returnBtn pageBtns pageBtns"
-      "rulesPages rulesPages rulesPages rulesPages";
-  }
+	.rules {
+		grid-template-columns: 1fr auto auto 1fr;
+		grid-template-areas:
+			"returnBtn returnBtn pageBtns pageBtns"
+			"rulesPages rulesPages rulesPages rulesPages";
+	}
 
-  .rules h1 {
-    display: none;
-  }
+	.rules h1 {
+		display: none;
+	}
 }

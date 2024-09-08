@@ -11,88 +11,83 @@ import styles from "./Settings.module.css";
 import { RootState } from "#/redux/store";
 
 const Settings = () => {
-  const [activeSetting, setActiveSetting] = useState(0);
-  const { areEmptyCells, isColorNumeration, turnTime } = useSelector(
-    (state: RootState) => state.settings
-  );
-  const { toggleEmptyCells, toggleColorNumeration, changeTurnTime } =
-    useActions();
-  const { t } = useTranslation();
+	const [activeSetting, setActiveSetting] = useState(0);
+	const { areEmptyCells, isColorNumeration, turnTime } = useSelector(
+		(state: RootState) => state.settings
+	);
+	const { toggleEmptyCells, toggleColorNumeration, changeTurnTime } = useActions();
+	const { t } = useTranslation();
 
-  const turnTimeSliderContent = {
-    text: t("settings.turnTimeSlider"),
-    minValue: 15,
-    maxValue: 300,
-    initialValue: turnTime / 1000,
-    allowInfinity: true,
-  };
+	const turnTimeSliderContent = {
+		text: t("settings.turnTimeSlider"),
+		minValue: 15,
+		maxValue: 300,
+		initialValue: turnTime / 1000,
+		allowInfinity: true,
+	};
 
-  const onEmptyCellsButtonClick = () => {
-    setActiveSetting(0);
-    setCookie("areEmptyCells", !areEmptyCells);
-    toggleEmptyCells();
-  };
+	const onEmptyCellsButtonClick = () => {
+		setActiveSetting(0);
+		setCookie("areEmptyCells", !areEmptyCells);
+		toggleEmptyCells();
+	};
 
-  const onColorNumerationButtonClick = () => {
-    setActiveSetting(1);
-    setCookie("isColorNumeration", !isColorNumeration);
-    toggleColorNumeration();
-  };
+	const onColorNumerationButtonClick = () => {
+		setActiveSetting(1);
+		setCookie("isColorNumeration", !isColorNumeration);
+		toggleColorNumeration();
+	};
 
-  const onTurnTimeSliderChange = (turnTime: number) => {
-    setActiveSetting(2);
-    setCookie("turnTime", turnTime * 1000);
-    changeTurnTime(turnTime * 1000);
-  };
+	const onTurnTimeSliderChange = (turnTime: number) => {
+		setActiveSetting(2);
+		setCookie("turnTime", turnTime * 1000);
+		changeTurnTime(turnTime * 1000);
+	};
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      let newActiveSetting = activeSetting;
-      if (activeSetting < 3 && (e.key === "s" || e.key === "ArrowDown"))
-        newActiveSetting++;
-      if (activeSetting === 3 && (e.key === "s" || e.key === "ArrowDown"))
-        newActiveSetting = 0;
-      if (activeSetting > 0 && (e.key === "w" || e.key === "ArrowUp"))
-        newActiveSetting--;
-      if (activeSetting === 0 && (e.key === "w" || e.key === "ArrowUp"))
-        newActiveSetting = 3;
-      setActiveSetting(newActiveSetting);
-    };
+	useEffect(() => {
+		const onKeyDown = (e: KeyboardEvent) => {
+			let newActiveSetting = activeSetting;
+			if (activeSetting < 3 && (e.key === "s" || e.key === "ArrowDown")) newActiveSetting++;
+			if (activeSetting === 3 && (e.key === "s" || e.key === "ArrowDown")) newActiveSetting = 0;
+			if (activeSetting > 0 && (e.key === "w" || e.key === "ArrowUp")) newActiveSetting--;
+			if (activeSetting === 0 && (e.key === "w" || e.key === "ArrowUp")) newActiveSetting = 3;
+			setActiveSetting(newActiveSetting);
+		};
 
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [activeSetting]);
+		document.addEventListener("keydown", onKeyDown);
+		return () => document.removeEventListener("keydown", onKeyDown);
+	}, [activeSetting]);
 
-  return (
-    <Suspense>
-      <div className={styles.settings}>
-        <h1>{t("settings.title")}</h1>
-        <div className={styles.returnBtn}>
-          <ReturnButton />
-        </div>
-        <div className={styles.settingsList}>
-          <SettingsButton
-            content={t("settings.emptyCellsButton")}
-            isChecked={areEmptyCells}
-            isActive={activeSetting === 0}
-            onClick={onEmptyCellsButtonClick}
-          />
-          <SettingsButton
-            content={t("settings.colorNumerationButton")}
-            isChecked={isColorNumeration}
-            isActive={activeSetting === 1}
-            onClick={onColorNumerationButtonClick}
-          />
-          <SettingsSlider
-            content={turnTimeSliderContent}
-            isActive={activeSetting === 2}
-            onChange={onTurnTimeSliderChange}
-          />
-        </div>
-        <LanguageButton isActive={activeSetting === 3} />
-      </div>
-    </Suspense>
-  );
+	return (
+		<Suspense>
+			<div className={styles.settings}>
+				<h1>{t("settings.title")}</h1>
+				<div className={styles.returnBtn}>
+					<ReturnButton />
+				</div>
+				<div className={styles.settingsList}>
+					<SettingsButton
+						content={t("settings.emptyCellsButton")}
+						isChecked={areEmptyCells}
+						isActive={activeSetting === 0}
+						onClick={onEmptyCellsButtonClick}
+					/>
+					<SettingsButton
+						content={t("settings.colorNumerationButton")}
+						isChecked={isColorNumeration}
+						isActive={activeSetting === 1}
+						onClick={onColorNumerationButtonClick}
+					/>
+					<SettingsSlider
+						content={turnTimeSliderContent}
+						isActive={activeSetting === 2}
+						onChange={onTurnTimeSliderChange}
+					/>
+				</div>
+				<LanguageButton isActive={activeSetting === 3} />
+			</div>
+		</Suspense>
+	);
 };
 
 export default Settings;

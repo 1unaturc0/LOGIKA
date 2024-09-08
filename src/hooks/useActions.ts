@@ -6,13 +6,13 @@ import { actions as settingsActions } from "#/redux/slices/settingsSlice";
 import { actions as gameActions } from "#/redux/slices/gameSlice";
 
 const allActions = {
-  ...tabActions,
-  ...settingsActions,
-  ...gameActions,
+	...tabActions,
+	...settingsActions,
+	...gameActions,
 };
 
 export const useActions = () => {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-  return useMemo(() => bindActionCreators(allActions, dispatch), [dispatch]);
+	return useMemo(() => bindActionCreators(allActions, dispatch), [dispatch]);
 };

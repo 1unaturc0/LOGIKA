@@ -4,24 +4,23 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
 i18n
-  .use(Backend)
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    debug: true,
-    fallbackLng: "en",
-    detection: {
-      order: ["querystring", "cookie", "navigator"],
-      lookupQuerystring: "lng",
-      lookupCookie: "lng",
-      caches: ["cookie"],
-    },
-    interpolation: {
-      escapeValue: false,
-    },
-    backend: {
-      loadPath: "locales/{{lng}}/{{ns}}.json",
-    },
-  });
+	.use(Backend)
+	.use(LanguageDetector)
+	.use(initReactI18next)
+	.init({
+		fallbackLng: "en",
+		detection: {
+			order: ["querystring", "cookie", "navigator"],
+			lookupQuerystring: "lng",
+			lookupCookie: "lng",
+			caches: ["cookie"],
+		},
+		interpolation: {
+			escapeValue: false,
+		},
+		backend: {
+			loadPath: "locales/{{lng}}/{{ns}}.json",
+		},
+	});
 
 export default i18n;

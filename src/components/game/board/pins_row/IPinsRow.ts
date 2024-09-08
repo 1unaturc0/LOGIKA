@@ -1,3 +1,3 @@
 export interface IPinsRowProps {
-  number: number;
+	number: number;
 }

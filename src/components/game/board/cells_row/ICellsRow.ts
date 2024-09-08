@@ -1,3 +1,3 @@
 export interface ICellsRowProps {
-  number: number;
+	number: number;
 }

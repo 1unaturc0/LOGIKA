@@ -1,3 +1,3 @@
 export interface IPinProps {
-  colorId: number;
+	colorId: number;
 }

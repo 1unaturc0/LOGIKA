@@ -5,23 +5,23 @@ import Cell from "#/components/cell/Cell";
 import styles from "./Header.module.css";
 
 const Header = () => {
-  const currentTab = useSelector((state: RootState) => state.tab.currentTab);
+	const currentTab = useSelector((state: RootState) => state.tab.currentTab);
 
-  return (
-    <header className={styles.header}>
-      {currentTab === "game" && (
-        <div className={styles.returnBtn}>
-          <ReturnButton />
-        </div>
-      )}
-      <h1>LOGIKA</h1>
-      <span>
-        <Cell colorId={1} />
-        <Cell colorId={2} />
-        <Cell colorId={3} />
-      </span>
-    </header>
-  );
+	return (
+		<header className={styles.header}>
+			{currentTab === "game" && (
+				<div className={styles.returnBtn}>
+					<ReturnButton />
+				</div>
+			)}
+			<h1>LOGIKA</h1>
+			<span>
+				<Cell colorId={1} />
+				<Cell colorId={2} />
+				<Cell colorId={3} />
+			</span>
+		</header>
+	);
 };
 
 export default Header;

@@ -1,3 +1,3 @@
 export interface ILanguageButtonProps {
-  isActive: boolean;
+	isActive: boolean;
 }

@@ -1,56 +1,56 @@
 .app {
-  min-height: 100vh;
-  padding-top: 55px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	min-height: 100vh;
+	padding-top: 55px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .menu {
-  position: relative;
-  width: 1000px;
-  height: 400px;
-  background-color: #023624;
-  border-radius: 200px;
-  box-shadow: 0 7px #002719;
-  text-shadow: 0 3px black;
+	position: relative;
+	width: 1000px;
+	height: 400px;
+	background-color: #023624;
+	border-radius: 200px;
+	box-shadow: 0 7px #002719;
+	text-shadow: 0 3px black;
 }
 
 .menu h1 {
-  font-size: 2rem;
-  letter-spacing: 0.3rem;
-  text-shadow: 0 3px black;
+	font-size: 2rem;
+	letter-spacing: 0.3rem;
+	text-shadow: 0 3px black;
 }
 
 .smallScreen {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  font-size: 2rem;
-  letter-spacing: 0.1rem;
-  text-align: center;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	font-size: 2rem;
+	letter-spacing: 0.1rem;
+	text-align: center;
 }
 
 .smallScreenIcon {
-  font-size: 100px;
+	font-size: 100px;
 }
 
 @media screen and (max-width: 700px) {
-  .menu {
-    width: 100%;
-    border-radius: 0;
-  }
+	.menu {
+		width: 100%;
+		border-radius: 0;
+	}
 }
 
 @media screen and (max-height: 600px) {
-  .app {
-    padding: 0;
-  }
+	.app {
+		padding: 0;
+	}
 }

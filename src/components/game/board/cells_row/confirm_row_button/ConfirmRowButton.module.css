@@ -1,53 +1,53 @@
 .confirmRowBtn {
-  position: absolute;
-  right: -105px;
-  top: 0;
-  width: 95px;
-  height: 100%;
-  border-radius: 20px;
-  background-color: #f3ca52;
-  box-shadow: 0 3px #c3a038;
-  text-shadow: 0 1px grey;
+	position: absolute;
+	right: -105px;
+	top: 0;
+	width: 95px;
+	height: 100%;
+	border-radius: 20px;
+	background-color: #f3ca52;
+	box-shadow: 0 3px #c3a038;
+	text-shadow: 0 1px grey;
 }
 
 .icon {
-  font-size: 22px;
+	font-size: 22px;
 }
 
 .confirmRowBtn:hover {
-  filter: brightness(0.8);
+	filter: brightness(0.8);
 }
 
 .disabled:hover {
-  filter: initial;
+	filter: initial;
 }
 
 .active {
-  border: 3px solid white;
+	border: 3px solid white;
 }
 
 .active::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  box-shadow: inset 0 1px grey;
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+	box-shadow: inset 0 1px grey;
 }
 
 @media screen and (max-width: 500px) {
-  .confirmRowBtn {
-    right: -102px;
-    width: 90px;
-  }
+	.confirmRowBtn {
+		right: -102px;
+		width: 90px;
+	}
 
-  .icon {
-    font-size: 20px;
-  }
+	.icon {
+		font-size: 20px;
+	}
 
-  .active {
-    border: 2px solid white;
-  }
+	.active {
+		border: 2px solid white;
+	}
 }

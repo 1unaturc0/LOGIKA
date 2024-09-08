@@ -1,55 +1,55 @@
 .settings {
-  height: 100%;
-  display: grid;
-  grid-template-rows: 90px 1fr;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-areas:
-    "returnBtn header languageBtn"
-    "returnBtn settingsList languageBtn";
-  place-items: center;
+	height: 100%;
+	display: grid;
+	grid-template-rows: 90px 1fr;
+	grid-template-columns: 1fr 3fr 1fr;
+	grid-template-areas:
+		"returnBtn header languageBtn"
+		"returnBtn settingsList languageBtn";
+	place-items: center;
 }
 
 .settings h1 {
-  grid-area: header;
+	grid-area: header;
 }
 
 .returnBtn {
-  grid-area: returnBtn;
+	grid-area: returnBtn;
 }
 
 .settingsList {
-  grid-area: settingsList;
-  width: 370px;
-  align-self: start;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  font-size: 1.7rem;
+	grid-area: settingsList;
+	width: 370px;
+	align-self: start;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	font-size: 1.7rem;
 }
 
 @media screen and (max-width: 600px) {
-  .settingsList {
-    width: 350px;
-  }
+	.settingsList {
+		width: 350px;
+	}
 }
 
 @media screen and (max-width: 500px) {
-  .settingsList {
-    width: 250px;
-    font-size: 1.3rem;
-  }
+	.settingsList {
+		width: 250px;
+		font-size: 1.3rem;
+	}
 }
 
 @media screen and (max-width: 400px) {
-  .settings {
-    grid-template-columns: 1fr auto auto 1fr;
-    grid-template-areas:
-      "returnBtn returnBtn languageBtn languageBtn"
-      ". settingsList settingsList .";
-  }
+	.settings {
+		grid-template-columns: 1fr auto auto 1fr;
+		grid-template-areas:
+			"returnBtn returnBtn languageBtn languageBtn"
+			". settingsList settingsList .";
+	}
 
-  .settings h1 {
-    display: none;
-  }
+	.settings h1 {
+		display: none;
+	}
 }
