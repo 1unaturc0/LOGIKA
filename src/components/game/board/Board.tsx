@@ -10,7 +10,7 @@ import PinsRow from "#/components/game/board/pins_row/PinsRow";
 import styles from "./Board.module.css";
 
 const Board = () => {
-	const [screenHeight, setScreenHeight] = useState(0);
+	const [screenHeight, setScreenHeight] = useState(Infinity);
 	const { activeCell, isGameOver } = useSelector((state: RootState) => state.game);
 
 	const cellsRows = [];

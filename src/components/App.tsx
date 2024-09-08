@@ -14,8 +14,8 @@ import styles from "./App.module.css";
 
 const App = () => {
 	const [screenSize, setScreenSize] = useState({
-		width: 0,
-		height: 0,
+		width: Infinity,
+		height: Infinity,
 	});
 	const currentTab = useSelector((state: RootState) => state.tab.currentTab);
 	const { initializeSettings } = useActions();
