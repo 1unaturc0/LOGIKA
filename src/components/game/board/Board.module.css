@@ -44,9 +44,21 @@
   flex-grow: 1;
 }
 
+.returnBtn {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
 @media screen and (max-height: 650px) {
   .board {
     padding: 10px 20px 10px 40px;
+  }
+}
+
+@media screen and (max-height: 650px) and (min-width: 500px) {
+  .board {
+    margin-bottom: 10px;
   }
 }
 
@@ -82,5 +94,12 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .board {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }

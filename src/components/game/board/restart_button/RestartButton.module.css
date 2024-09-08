@@ -2,8 +2,8 @@
   position: absolute;
   width: 40px;
   height: 40px;
-  left: 14px;
-  top: 22px;
+  left: 11px;
+  top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,6 +22,18 @@
 
 @media screen and (max-height: 650px) {
   .restartBtn {
-    top: 13px;
+    top: 10px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .restartBtn {
+    left: 10px;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .restartBtn {
+    left: 62px;
   }
 }

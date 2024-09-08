@@ -17,8 +17,9 @@
 }
 
 .menu h1 {
-  font-size: 2.3rem;
+  font-size: 2rem;
   letter-spacing: 0.3rem;
+  text-shadow: 0 3px black;
 }
 
 .smallScreen {
@@ -45,5 +46,11 @@
   .menu {
     width: 100%;
     border-radius: 0;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .app {
+    padding: 0;
   }
 }

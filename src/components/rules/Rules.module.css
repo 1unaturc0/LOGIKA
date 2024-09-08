@@ -10,9 +10,8 @@
   text-shadow: 0 1px black;
 }
 
-h1 {
+.rules h1 {
   grid-area: header;
-  text-shadow: 0 3px black;
 }
 
 .returnBtn {
@@ -22,10 +21,8 @@ h1 {
 .pageBtns {
   grid-area: pageBtns;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  user-select: none;
 }
 
 @media screen and (max-width: 600px) {
@@ -44,5 +41,18 @@ h1 {
 
   .pageBtns {
     font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .rules {
+    grid-template-columns: 1fr auto auto 1fr;
+    grid-template-areas:
+      "returnBtn returnBtn pageBtns pageBtns"
+      "rulesPages rulesPages rulesPages rulesPages";
+  }
+
+  .rules h1 {
+    display: none;
   }
 }

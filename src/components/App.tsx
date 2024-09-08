@@ -42,7 +42,7 @@ const App = () => {
 
   return (
     <div className={styles.app}>
-      {screenSize.width >= 350 && screenSize.height >= 600 ? (
+      {screenSize.width >= 310 && screenSize.height >= 550 ? (
         <>
           <Header />
           {currentTab === "game" ? (

@@ -39,12 +39,18 @@
   }
 }
 
-@media screen and (max-height: 650px) {
+@media screen and (max-height: 650px), screen and (max-width: 350px) {
   .header > * {
     font-size: 2rem;
   }
 
   .returnBtn {
     top: 3px;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .header {
+    display: none;
   }
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { pagesContent } from "#/components/rules/rules_pages_content/rulesPagesContent";
 import ReturnButton from "#/components/return_button/ReturnButton";
 import RulesPage from "#/components/rules/rules_page/RulesPage";
@@ -49,11 +49,11 @@ const Rules = () => {
       {pages[currentPage]}
       <div className={styles.pageBtns}>
         <PageButton onClick={onPreviousButtonClick}>
-          <FaChevronUp />
+          <FaChevronLeft />
         </PageButton>
         {`${currentPage + 1}/${pages.length}`}
         <PageButton onClick={onNextButtonClick}>
-          <FaChevronDown />
+          <FaChevronRight />
         </PageButton>
       </div>
     </div>

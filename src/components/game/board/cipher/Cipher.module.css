@@ -32,3 +32,16 @@
     line-height: 35px;
   }
 }
+
+@media screen and (max-width: 350px) {
+  .cipher {
+    margin-left: 60px;
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .cipher {
+    margin-left: 100px;
+  }
+}

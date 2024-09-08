@@ -56,3 +56,15 @@
     top: 13px;
   }
 }
+
+@media screen and (max-width: 350px) {
+  .turnTime {
+    left: 13px;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .turnTime {
+    left: 65px;
+  }
+}

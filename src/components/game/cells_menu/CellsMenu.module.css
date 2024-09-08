@@ -76,3 +76,9 @@
     box-shadow: none;
   }
 }
+
+@media screen and (max-width: 350px) {
+  .cells {
+    gap: 5px 20px;
+  }
+}
