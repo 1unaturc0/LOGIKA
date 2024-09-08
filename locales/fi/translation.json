@@ -1,30 +1,31 @@
 {
-  "smallScreen": "Unfortunately, your screen is too small to display the content",
-  "main": {
-    "playButton": "Pelaa",
-    "settingsButton": "Asetukset",
-    "rulesButton": "Säännöt"
-  },
-  "settings": {
-    "title": "Asetukset",
-    "emptyCellsButton": "Tyhjät solut",
-    "colorNumerationButton": "Värien numerointi",
-    "turnTimeSlider": "Käännä aikaa: "
-  },
-  "rules": {
-    "title": "Säännöt",
-    "pages": [
-      "Arvaa viiden väritetyn solun yhistelmä. On olemassa 8 mahdollista värien variaatiota.",
-      "Voit tehdä oletuksesi 12 kertaa. Jokaisen yrityksen jälkeen näet, kuinka lähellä olet oikeaa vastausta.",
-      "Valkoinen nuppineula näyttää, että olet arvannut solun värin oikein, mutta et sen sijainti.",
-      "Musta nuppineula tarkoittaa solun olevan oikean värinen ja oikeassa paikassa.",
-      "Nuppineulojen sijainti ei korreloi solujen sijoituksien kanssa."
-    ]
-  },
-  "game": {
-    "cipher": "Salakirjoitus"
-  },
-  "modalWindow": {
-    "confirmReturn": "Oletko varma, että haluat palata valikkoon?"
-  }
+	"smallScreen": "Unfortunately, your screen is too small to display the content",
+	"main": {
+		"playButton": "Pelaa",
+		"settingsButton": "Asetukset",
+		"rulesButton": "Säännöt"
+	},
+	"settings": {
+		"title": "Asetukset",
+		"emptyCellsButton": "Tyhjät solut",
+		"colorNumerationButton": "Värien numerointi",
+		"turnTimeSlider": "Käännä aikaa: "
+	},
+	"rules": {
+		"title": "Säännöt",
+		"pages": [
+			"Arvaa viiden väritetyn solun yhistelmä. On olemassa 8 mahdollista värien variaatiota.",
+			"Voit tehdä oletuksesi 12 kertaa. Jokaisen yrityksen jälkeen näet, kuinka lähellä olet oikeaa vastausta.",
+			"Valkoinen nuppineula näyttää, että olet arvannut solun värin oikein, mutta et sen sijainti.",
+			"Musta nuppineula tarkoittaa solun olevan oikean värinen ja oikeassa paikassa.",
+			"Nuppineulojen sijainti ei korreloi solujen sijoituksien kanssa."
+		]
+	},
+	"game": {
+		"cipher": "Salakirjoitus"
+	},
+	"modalWindow": {
+		"confirmReturn": "Oletko varma, että haluat palata valikkoon?",
+		"confirmContinue": "Haluatko jatkaa aloitettua peliä?"
+	}
 }
