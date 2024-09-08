@@ -13,18 +13,6 @@ const ReturnButton = () => {
 	const currentTab = useSelector((state: RootState) => state.tab.currentTab);
 	const { changeTab } = useActions();
 
-	const onClick = () => {
-		if (currentTab === "game") setIsModalShown(true);
-		else changeTab("main");
-	};
-
-	const onConfirmButtonClick = () => {
-		setIsModalShown(false);
-		changeTab("main");
-	};
-
-	const onDeclineButtonClick = () => setIsModalShown(false);
-
 	useEffect(() => {
 		const onKeyDown = (e: KeyboardEvent) => {
 			if (currentTab === "game" && e.key === "Escape") setIsModalShown(true);
@@ -37,15 +25,18 @@ const ReturnButton = () => {
 
 	return (
 		<button
-			onClick={onClick}
+			onClick={() => {
+				if (currentTab === "game") setIsModalShown(true);
+				else changeTab("main");
+			}}
 			className={styles.returnBtn}
 		>
 			<FaSignOutAlt />
 			{isModalShown && (
 				<ModalWindow
 					text={t("modalWindow.confirmReturn")}
-					onConfirmButtonClick={onConfirmButtonClick}
-					onDeclineButtonClick={onDeclineButtonClick}
+					onConfirmButtonClick={() => changeTab("main")}
+					onDeclineButtonClick={() => setIsModalShown(false)}
 				/>
 			)}
 		</button>

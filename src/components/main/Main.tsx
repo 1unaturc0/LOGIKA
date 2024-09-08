@@ -1,18 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useInsertionEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FaCog, FaPlay, FaScroll } from "react-icons/fa";
 import { useActions } from "#/hooks/useActions";
 import { isDesktopCheck } from "#/utils/isDesktopCheck";
 import MainButton from "#/components/main/main_button/MainButton";
 import styles from "./Main.module.css";
+import ModalWindow from "../modal_window/ModalWindow";
+import { clearGameData } from "#/utils/clearGameData";
 
 const Main = () => {
+	const [isModalShown, setIsModalShown] = useState(false);
 	const [activeButton, setActiveButton] = useState(1);
 	const { changeTab } = useActions();
 	const { t } = useTranslation();
 	const [activeIconClassName, setActiveIconClassName] = useState("");
 
-	useEffect(() => {
+	useInsertionEffect(() => {
 		if (isDesktopCheck()) setActiveIconClassName(styles.activeIcon);
 		else setActiveIconClassName(styles.icon);
 	}, []);
@@ -43,7 +46,10 @@ const Main = () => {
 			<MainButton
 				content={t("main.playButton")}
 				isActive={activeButton === 1}
-				onClick={() => changeTab("game")}
+				onClick={() => {
+					if (localStorage.getItem("cipher") === null) changeTab("game");
+					else setIsModalShown(true);
+				}}
 			>
 				<FaPlay className={activeButton === 1 ? activeIconClassName : styles.icon} />
 			</MainButton>
@@ -54,6 +60,18 @@ const Main = () => {
 			>
 				<FaScroll className={activeButton === 2 ? activeIconClassName : styles.icon} />
 			</MainButton>
+			{isModalShown && (
+				<ModalWindow
+					text={t("modalWindow.confirmContinue")}
+					onConfirmButtonClick={() => {
+						changeTab("game");
+					}}
+					onDeclineButtonClick={() => {
+						clearGameData();
+						changeTab("game");
+					}}
+				/>
+			)}
 		</nav>
 	);
 };

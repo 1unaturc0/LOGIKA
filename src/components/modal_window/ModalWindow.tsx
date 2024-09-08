@@ -7,7 +7,7 @@ import { IModalWindowProps } from "./IModalWindow";
 
 const ModalWindow = ({ text, onConfirmButtonClick, onDeclineButtonClick }: IModalWindowProps) => {
 	const [activeButton, setActiveButton] = useState(0);
-	const modalWindowRef = useRef<HTMLDivElement>(null);
+	const modalWindowRef = useRef<HTMLDivElement | null>(null);
 
 	const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
 		e.stopPropagation();
@@ -19,23 +19,19 @@ const ModalWindow = ({ text, onConfirmButtonClick, onDeclineButtonClick }: IModa
 			else onDeclineButtonClick();
 	};
 
-	useEffect(() => modalWindowRef.current!.focus(), []);
+	useEffect(() => {
+		if (modalWindowRef.current === null) return;
+		modalWindowRef.current.focus();
+	}, []);
 
 	return createPortal(
 		<div
 			ref={modalWindowRef}
 			tabIndex={0}
-			onClick={e => {
-				e.stopPropagation();
-				onDeclineButtonClick();
-			}}
 			onKeyDown={onKeyDown}
 			className={styles.modalWindow}
 		>
-			<div
-				onClick={e => e.stopPropagation()}
-				className={styles.content}
-			>
+			<div className={styles.content}>
 				<h4>{text}</h4>
 				<div className={styles.btns}>
 					<ModalWindowButton

@@ -25,6 +25,7 @@
 		"cipher": "Salakirjoitus"
 	},
 	"modalWindow": {
-		"confirmReturn": "Oletko varma, että haluat palata valikkoon?"
+		"confirmReturn": "Oletko varma, että haluat palata valikkoon?",
+		"confirmContinue": "Haluatko jatkaa aloitettua peliä?"
 	}
 }

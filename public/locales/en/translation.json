@@ -25,6 +25,7 @@
 		"cipher": "CIPHER"
 	},
 	"modalWindow": {
-		"confirmReturn": "Do you actually want to return to the menu?"
+		"confirmReturn": "Do you actually want to return to the menu?",
+		"confirmContinue": "Do you want to continue the game you started?"
 	}
 }

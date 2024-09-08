@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useInsertionEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { isDesktopCheck } from "#/utils/isDesktopCheck";
 import styles from "./LanguageButton.module.css";
@@ -21,7 +21,7 @@ const LanguageButton = ({ isActive }: ILanguageButtonProps) => {
 		if (currentLocaleIndex === locales.length - 1) i18n.changeLanguage(locales[0].code);
 	};
 
-	useEffect(() => {
+	useInsertionEffect(() => {
 		if (isActive && isDesktopCheck()) setClassName(`${styles.languageBtn} ${styles.active}`);
 		else setClassName(styles.languageBtn);
 	}, [isActive]);

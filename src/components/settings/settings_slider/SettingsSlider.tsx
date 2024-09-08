@@ -1,41 +1,44 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useInsertionEffect } from "react";
 import { isDesktopCheck } from "#/utils/isDesktopCheck";
 import styles from "./SettingsSlider.module.css";
 import { ISettingsSliderProps } from "./ISettingsSlider";
 
 const SettingsSlider = ({ content, isActive, onChange }: ISettingsSliderProps) => {
 	const [value, setValue] = useState(content.initialValue);
-	const [className, setClassName] = useState("");
-	const minEndRef = useRef<HTMLDivElement>(null);
-	const maxEndRef = useRef<HTMLDivElement>(null);
-	const infinityRef = useRef<HTMLDivElement>(null);
-	const gripRef = useRef<HTMLDivElement>(null);
+	const [activeClassName, setActiveClassName] = useState("");
+	const minEndRef = useRef<HTMLDivElement | null>(null);
+	const maxEndRef = useRef<HTMLDivElement | null>(null);
+	const infinityRef = useRef<HTMLDivElement | null>(null);
+	const gripRef = useRef<HTMLDivElement | null>(null);
 
 	const valueRange = content.maxValue - content.minValue;
 
-	useEffect(() => {
-		if (isActive && isDesktopCheck()) setClassName(`${styles.settingsSlider} ${styles.active}`);
-		else setClassName(styles.settingsSlider);
+	useInsertionEffect(() => {
+		if (isActive && isDesktopCheck()) setActiveClassName(styles.active);
+		else setActiveClassName("");
 	}, [isActive]);
 
 	useEffect(() => {
 		const isDesktop = isDesktopCheck();
+
+		const grip = gripRef.current;
+		const minEnd = minEndRef.current;
+		const maxEnd = maxEndRef.current;
+		if (grip === null || minEnd === null || maxEnd === null) return;
+
 		let newValue = value;
 
 		const onDragStart = (e: MouseEvent | TouchEvent) => {
 			const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
 
-			const minEnd = minEndRef.current!;
-			const maxEnd = maxEndRef.current!;
 			const endsRange = maxEnd.getBoundingClientRect().right - minEnd.getBoundingClientRect().left;
 
-			const infinityCenter = content.allowInfinity
-				? infinityRef.current!.offsetLeft + infinityRef.current!.offsetWidth / 2
-				: maxEnd.getBoundingClientRect().left + maxEnd.offsetWidth;
+			const infinityCenter =
+				infinityRef.current !== null
+					? infinityRef.current?.offsetLeft + infinityRef.current?.offsetWidth / 2
+					: maxEnd.getBoundingClientRect().left + maxEnd.offsetWidth;
 
-			const grip = gripRef.current!;
 			const gripRadius = grip.offsetWidth / 2;
-
 			const minGripLeft = minEnd.offsetWidth / 2 - gripRadius;
 			const maxGripLeft = endsRange - gripRadius - maxEnd.offsetWidth / 2;
 			const sliderRange = maxGripLeft - minGripLeft;
@@ -79,8 +82,8 @@ const SettingsSlider = ({ content, isActive, onChange }: ISettingsSliderProps) =
 			}
 		};
 
-		if (isDesktop) gripRef.current!.onmousedown = onDragStart;
-		else gripRef.current!.ontouchstart = onDragStart;
+		if (isDesktop) grip.onmousedown = onDragStart;
+		else grip.ontouchstart = onDragStart;
 	});
 
 	useEffect(() => {
@@ -108,17 +111,19 @@ const SettingsSlider = ({ content, isActive, onChange }: ISettingsSliderProps) =
 	});
 
 	useEffect(() => {
-		const minEnd = minEndRef.current!;
-		const maxEnd = maxEndRef.current!;
+		const grip = gripRef.current;
+		const minEnd = minEndRef.current;
+		const maxEnd = maxEndRef.current;
+
+		if (grip === null || minEnd === null || maxEnd === null) return;
+
 		const endsRange = maxEnd.getBoundingClientRect().right - minEnd.getBoundingClientRect().left;
+		const infinityCenter =
+			infinityRef.current !== null
+				? infinityRef.current.offsetLeft + infinityRef.current.offsetWidth / 2
+				: maxEnd.getBoundingClientRect().left + maxEnd.offsetWidth;
 
-		const infinityCenter = content.allowInfinity
-			? infinityRef.current!.offsetLeft + infinityRef.current!.offsetWidth / 2
-			: maxEnd.getBoundingClientRect().left + maxEnd.offsetWidth;
-
-		const grip = gripRef.current!;
 		const gripRadius = grip.offsetWidth / 2;
-
 		const minGripLeft = minEnd.offsetWidth / 2 - gripRadius;
 		const maxGripLeft = endsRange - gripRadius - maxEnd.offsetWidth / 2;
 		const sliderRange = maxGripLeft - minGripLeft;
@@ -131,7 +136,7 @@ const SettingsSlider = ({ content, isActive, onChange }: ISettingsSliderProps) =
 	}, [content.initialValue, content.minValue, value, valueRange, content.allowInfinity]);
 
 	return (
-		<div className={className}>
+		<div className={`${styles.settingsSlider} ${activeClassName}`}>
 			<p>
 				{content.text}
 				{value === Infinity ? "Ꝏ" : value}

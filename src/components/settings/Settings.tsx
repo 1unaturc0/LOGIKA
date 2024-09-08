@@ -1,7 +1,6 @@
-import { Suspense, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { setCookie } from "#/utils/cookies";
 import { useActions } from "#/hooks/useActions";
 import SettingsButton from "#/components/settings/settings_button/SettingsButton";
 import SettingsSlider from "#/components/settings/settings_slider/SettingsSlider";
@@ -28,19 +27,16 @@ const Settings = () => {
 
 	const onEmptyCellsButtonClick = () => {
 		setActiveSetting(0);
-		setCookie("areEmptyCells", !areEmptyCells);
 		toggleEmptyCells();
 	};
 
 	const onColorNumerationButtonClick = () => {
 		setActiveSetting(1);
-		setCookie("isColorNumeration", !isColorNumeration);
 		toggleColorNumeration();
 	};
 
 	const onTurnTimeSliderChange = (turnTime: number) => {
 		setActiveSetting(2);
-		setCookie("turnTime", turnTime * 1000);
 		changeTurnTime(turnTime * 1000);
 	};
 
@@ -59,34 +55,32 @@ const Settings = () => {
 	}, [activeSetting]);
 
 	return (
-		<Suspense>
-			<div className={styles.settings}>
-				<h1>{t("settings.title")}</h1>
-				<div className={styles.returnBtn}>
-					<ReturnButton />
-				</div>
-				<div className={styles.settingsList}>
-					<SettingsButton
-						content={t("settings.emptyCellsButton")}
-						isChecked={areEmptyCells}
-						isActive={activeSetting === 0}
-						onClick={onEmptyCellsButtonClick}
-					/>
-					<SettingsButton
-						content={t("settings.colorNumerationButton")}
-						isChecked={isColorNumeration}
-						isActive={activeSetting === 1}
-						onClick={onColorNumerationButtonClick}
-					/>
-					<SettingsSlider
-						content={turnTimeSliderContent}
-						isActive={activeSetting === 2}
-						onChange={onTurnTimeSliderChange}
-					/>
-				</div>
-				<LanguageButton isActive={activeSetting === 3} />
+		<div className={styles.settings}>
+			<h1>{t("settings.title")}</h1>
+			<div className={styles.returnBtn}>
+				<ReturnButton />
 			</div>
-		</Suspense>
+			<div className={styles.settingsList}>
+				<SettingsButton
+					content={t("settings.emptyCellsButton")}
+					isChecked={areEmptyCells}
+					isActive={activeSetting === 0}
+					onClick={onEmptyCellsButtonClick}
+				/>
+				<SettingsButton
+					content={t("settings.colorNumerationButton")}
+					isChecked={isColorNumeration}
+					isActive={activeSetting === 1}
+					onClick={onColorNumerationButtonClick}
+				/>
+				<SettingsSlider
+					content={turnTimeSliderContent}
+					isActive={activeSetting === 2}
+					onChange={onTurnTimeSliderChange}
+				/>
+			</div>
+			<LanguageButton isActive={activeSetting === 3} />
+		</div>
 	);
 };
 

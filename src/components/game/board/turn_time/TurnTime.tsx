@@ -9,9 +9,11 @@ const TurnTime = () => {
 	const { confirmRow } = useActions();
 
 	const [timeLeft, setTimeLeft] = useState(turnTime);
-	const progressRef = useRef<HTMLDivElement>(null);
+	const progressRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
+		if (progressRef.current === null) return;
+
 		const percentage = turnTime === Infinity ? 0 : 100 - (100 / turnTime) * timeLeft;
 
 		const greenValue = 176 - (176 / 150) * percentage;
@@ -24,7 +26,7 @@ const TurnTime = () => {
 			confirmRow();
 		}, 100);
 
-		progressRef.current!.style.background = `conic-gradient(
+		progressRef.current.style.background = `conic-gradient(
                 rgb(213, ${greenValue}, ${blueValue}) ${percentage}%, \
                 transparent 0
             )`;

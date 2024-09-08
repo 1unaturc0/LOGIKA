@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useInsertionEffect } from "react";
 import { FaCheck, FaXmark } from "react-icons/fa6";
 import { isDesktopCheck } from "#/utils/isDesktopCheck";
 import styles from "./SettingsButton.module.css";
@@ -7,7 +7,7 @@ import { ISettingsButtonProps } from "./ISettingsButon";
 const SettingsButton = ({ content, isChecked, isActive, onClick }: ISettingsButtonProps) => {
 	const [className, setClassName] = useState("");
 
-	useEffect(() => {
+	useInsertionEffect(() => {
 		if (isActive && isDesktopCheck()) setClassName(`${styles.settingsBtn} ${styles.active}`);
 		else setClassName(styles.settingsBtn);
 	}, [isActive]);

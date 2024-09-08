@@ -52,24 +52,11 @@ export const gameSlice = createSlice({
 				state.activeCell.column = state.activeCell.column < 4 ? state.activeCell.column + 1 : null;
 			}
 		},
-		initializeGame: (state, { payload: cipher }) => {
-			state.cipher = cipher;
-			state.cells = [
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-				[0, 0, 0, 0, 0],
-			];
+		initializeGame: (state, { payload }) => {
+			state.cipher = payload.cipher;
+			state.cells = payload.cells;
 			state.activeCell = {
-				row: 0,
+				row: payload.activeRow,
 				column: 0,
 			};
 			state.isGameOver = false;

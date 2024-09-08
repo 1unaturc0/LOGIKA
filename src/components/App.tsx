@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { RiEmotionSadLine } from "react-icons/ri";
 import { useActions } from "#/hooks/useActions";
-import { getCookie } from "#/utils/cookies";
 import { RootState } from "#/redux/store";
 import Header from "#/components/header/Header";
 import Main from "#/components/main/Main";
@@ -23,9 +22,12 @@ const App = () => {
 
 	useEffect(() => {
 		initializeSettings({
-			areEmptyCells: getCookie("areEmptyCells") === "true" ? true : false,
-			isColorNumeration: getCookie("isColorNumeration") === "true" ? true : false,
-			turnTime: getCookie("turnTime") === undefined ? Infinity : Number(getCookie("turnTime")),
+			areEmptyCells: localStorage.getItem("areEmptyCells") === "true" ? true : false,
+			isColorNumeration: localStorage.getItem("isColorNumeration") === "true" ? true : false,
+			turnTime:
+				localStorage.getItem("turnTime") === undefined
+					? Infinity
+					: Number(localStorage.getItem("turnTime")),
 		});
 	}, [initializeSettings]);
 
