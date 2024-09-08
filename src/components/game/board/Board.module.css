@@ -90,9 +90,6 @@
 	.board {
 		position: absolute;
 		bottom: 98px;
-		border-bottom: none;
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
 		box-shadow: none;
 	}
 }

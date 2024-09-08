@@ -12,7 +12,7 @@ const Cipher = () => {
 		<div className={styles.cipher}>
 			{!isGameOver && (
 				<div
-					style={i18n.resolvedLanguage === "fi" ? { letterSpacing: "2px" } : {}}
+					style={i18n.resolvedLanguage === "fi" ? { letterSpacing: 0 } : {}}
 					className={styles.cover}
 				>
 					{t("game.cipher")}
