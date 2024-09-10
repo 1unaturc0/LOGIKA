@@ -1,4 +1,4 @@
-import { useState, useEffect, useInsertionEffect } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { isDesktopCheck } from "#/utils/isDesktopCheck";
 import styles from "./LanguageButton.module.css";
@@ -11,7 +11,7 @@ const locales = [
 ];
 
 const LanguageButton = ({ isActive }: ILanguageButtonProps) => {
-	const [className, setClassName] = useState("");
+	const [activeClassName, setActiveClassName] = useState("");
 	const { i18n } = useTranslation();
 	const currentLocaleIndex = locales.findIndex(locale => locale.code === i18n.resolvedLanguage);
 
@@ -21,9 +21,9 @@ const LanguageButton = ({ isActive }: ILanguageButtonProps) => {
 		if (currentLocaleIndex === locales.length - 1) i18n.changeLanguage(locales[0].code);
 	};
 
-	useInsertionEffect(() => {
-		if (isActive && isDesktopCheck()) setClassName(`${styles.languageBtn} ${styles.active}`);
-		else setClassName(styles.languageBtn);
+	useEffect(() => {
+		if (isActive && isDesktopCheck()) setActiveClassName(styles.active);
+		else setActiveClassName("");
 	}, [isActive]);
 
 	useEffect(() => {
@@ -53,7 +53,7 @@ const LanguageButton = ({ isActive }: ILanguageButtonProps) => {
 	return (
 		<button
 			onClick={onClick}
-			className={className}
+			className={`${styles.languageBtn} ${activeClassName}`}
 		>
 			<img
 				src={locales[currentLocaleIndex].path}

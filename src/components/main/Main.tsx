@@ -1,4 +1,4 @@
-import { useState, useEffect, useInsertionEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FaCog, FaPlay, FaScroll } from "react-icons/fa";
 import { useActions } from "#/hooks/useActions";
@@ -13,11 +13,10 @@ const Main = () => {
 	const [activeButton, setActiveButton] = useState(1);
 	const { changeTab } = useActions();
 	const { t } = useTranslation();
-	const [activeIconClassName, setActiveIconClassName] = useState("");
+	const [activeIconClassName, setActiveIconClassName] = useState(styles.icon);
 
-	useInsertionEffect(() => {
+	useLayoutEffect(() => {
 		if (isDesktopCheck()) setActiveIconClassName(styles.activeIcon);
-		else setActiveIconClassName(styles.icon);
 	}, []);
 
 	useEffect(() => {

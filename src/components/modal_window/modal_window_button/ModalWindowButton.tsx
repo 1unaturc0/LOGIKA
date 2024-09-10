@@ -1,29 +1,23 @@
-import { useState, useEffect as useInsertionEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { isDesktopCheck } from "#/utils/isDesktopCheck";
 import styles from "./ModalWindowButton.module.css";
 import { IModalWindowButtonProps } from "./IModalWindowButton";
 
 const ModalWindowButton = ({ isConfirm, isActive, onClick, children }: IModalWindowButtonProps) => {
-	const [className, setClassName] = useState("");
+	const [activeClassName, setActiveClassName] = useState("");
 
-	useInsertionEffect(() => {
-		if (isActive && isDesktopCheck())
-			setClassName(`
-        ${styles.modalWindowBtn} \
-        ${isConfirm ? styles.confirm : styles.decline} \
-        ${styles.active}
-      `);
-		else
-			setClassName(`
-        ${styles.modalWindowBtn} \
-        ${isConfirm ? styles.confirm : styles.decline}
-      `);
+	useLayoutEffect(() => {
+		if (isActive && isDesktopCheck()) setActiveClassName(styles.active);
+		else setActiveClassName("");
 	}, [isActive, isConfirm]);
 
 	return (
 		<button
 			onClick={onClick}
-			className={className}
+			className={`
+				${styles.modalWindowBtn} \
+				${isConfirm ? styles.confirm : styles.decline} \
+				${activeClassName}`}
 		>
 			{children}
 		</button>

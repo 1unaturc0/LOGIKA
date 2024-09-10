@@ -1,15 +1,15 @@
-import { useState, useEffect, useInsertionEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { FaCheck, FaXmark } from "react-icons/fa6";
 import { isDesktopCheck } from "#/utils/isDesktopCheck";
 import styles from "./SettingsButton.module.css";
 import { ISettingsButtonProps } from "./ISettingsButon";
 
 const SettingsButton = ({ content, isChecked, isActive, onClick }: ISettingsButtonProps) => {
-	const [className, setClassName] = useState("");
+	const [activeClassName, setActiveClassName] = useState("");
 
-	useInsertionEffect(() => {
-		if (isActive && isDesktopCheck()) setClassName(`${styles.settingsBtn} ${styles.active}`);
-		else setClassName(styles.settingsBtn);
+	useLayoutEffect(() => {
+		if (isActive && isDesktopCheck()) setActiveClassName(styles.active);
+		else setActiveClassName("");
 	}, [isActive]);
 
 	useEffect(() => {
@@ -25,7 +25,7 @@ const SettingsButton = ({ content, isChecked, isActive, onClick }: ISettingsButt
 
 	return (
 		<button
-			className={className}
+			className={`${styles.settingsBtn} ${activeClassName}`}
 			onClick={onClick}
 		>
 			{isChecked ? <FaCheck className={styles.icon} /> : <FaXmark className={styles.icon} />}

@@ -24,10 +24,9 @@ const App = () => {
 		initializeSettings({
 			areEmptyCells: localStorage.getItem("areEmptyCells") === "true" ? true : false,
 			isColorNumeration: localStorage.getItem("isColorNumeration") === "true" ? true : false,
-			turnTime:
-				localStorage.getItem("turnTime") === undefined
-					? Infinity
-					: Number(localStorage.getItem("turnTime")),
+			turnTime: localStorage.getItem("turnTime")
+				? Number(localStorage.getItem("turnTime"))
+				: Infinity,
 		});
 	}, [initializeSettings]);
 

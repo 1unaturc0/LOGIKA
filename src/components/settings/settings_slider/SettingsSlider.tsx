@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useInsertionEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { isDesktopCheck } from "#/utils/isDesktopCheck";
 import styles from "./SettingsSlider.module.css";
 import { ISettingsSliderProps } from "./ISettingsSlider";
@@ -13,7 +13,7 @@ const SettingsSlider = ({ content, isActive, onChange }: ISettingsSliderProps) =
 
 	const valueRange = content.maxValue - content.minValue;
 
-	useInsertionEffect(() => {
+	useLayoutEffect(() => {
 		if (isActive && isDesktopCheck()) setActiveClassName(styles.active);
 		else setActiveClassName("");
 	}, [isActive]);
