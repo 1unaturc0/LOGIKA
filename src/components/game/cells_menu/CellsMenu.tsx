@@ -1,13 +1,24 @@
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useActions } from "#/hooks/useActions";
+import { RootState } from "#/redux/store";
 import Cell from "#/components/cell/Cell";
 import styles from "./CellsMenu.module.css";
 
 const CellsMenu = () => {
+	const areEmptyCells = useSelector((state: RootState) => state.settings.areEmptyCells);
 	const { changeCellColor } = useActions();
 
 	const cells = [];
-	for (let i = 0; i < 9; i++)
+	cells.push(
+		<Cell
+			key={0}
+			colorId={0}
+			isActive={areEmptyCells ? true : false}
+			onClick={() => changeCellColor(0)}
+		/>
+	);
+	for (let i = 1; i < 9; i++)
 		cells.push(
 			<Cell
 				key={i}

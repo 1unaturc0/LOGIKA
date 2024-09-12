@@ -27,6 +27,9 @@ const App = () => {
 			turnTime: localStorage.getItem("turnTime")
 				? Number(localStorage.getItem("turnTime"))
 				: Infinity,
+			rowsAmount: localStorage.getItem("rowsAmount")
+				? Number(localStorage.getItem("rowsAmount"))
+				: 12,
 		});
 	}, [initializeSettings]);
 

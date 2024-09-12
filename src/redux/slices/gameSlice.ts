@@ -61,6 +61,11 @@ export const gameSlice = createSlice({
 			};
 			state.isGameOver = false;
 		},
+		reachedLockedRow: state => {
+			state.activeCell.row--;
+			state.activeCell.column = null;
+			state.isGameOver = true;
+		},
 	},
 });
 

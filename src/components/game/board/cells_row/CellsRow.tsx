@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { FaLock } from "react-icons/fa";
 import { useActions } from "#/hooks/useActions";
 import Cell from "#/components/cell/Cell";
 import ConfirmRowButton from "#/components/game/board/cells_row/confirm_row_button/ConfirmRowButton";
@@ -9,6 +10,7 @@ import { ICellsRowProps } from "./ICellsRow";
 
 const CellsRow = ({ number }: ICellsRowProps) => {
 	const { cells, activeCell, isGameOver } = useSelector((state: RootState) => state.game);
+	const rowsAmount = useSelector((state: RootState) => state.settings.rowsAmount);
 	const { changeActiveCell } = useActions();
 
 	const onCellClick = (row: number, column: number) => {
@@ -61,6 +63,11 @@ const CellsRow = ({ number }: ICellsRowProps) => {
 			>
 				{number + 1}
 			</span>
+			{number >= rowsAmount && (
+				<div className={styles.locked}>
+					<FaLock />
+				</div>
+			)}
 			{cells[number].map((cell, i) => (
 				<Cell
 					key={i}

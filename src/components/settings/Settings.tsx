@@ -11,10 +11,11 @@ import { RootState } from "#/redux/store";
 
 const Settings = () => {
 	const [activeSetting, setActiveSetting] = useState(0);
-	const { areEmptyCells, isColorNumeration, turnTime } = useSelector(
+	const { areEmptyCells, isColorNumeration, turnTime, rowsAmount } = useSelector(
 		(state: RootState) => state.settings
 	);
-	const { toggleEmptyCells, toggleColorNumeration, changeTurnTime } = useActions();
+	const { toggleEmptyCells, toggleColorNumeration, changeTurnTime, changeRowsAmount } =
+		useActions();
 	const { t } = useTranslation();
 
 	const turnTimeSliderContent = {
@@ -23,6 +24,14 @@ const Settings = () => {
 		maxValue: 300,
 		initialValue: turnTime / 1000,
 		allowInfinity: true,
+	};
+
+	const rowsSliderContent = {
+		text: t("settings.rowsSlider"),
+		minValue: 8,
+		maxValue: 12,
+		initialValue: rowsAmount,
+		allowInfinity: false,
 	};
 
 	const onEmptyCellsButtonClick = () => {
@@ -40,13 +49,18 @@ const Settings = () => {
 		changeTurnTime(turnTime * 1000);
 	};
 
+	const onRowsSliderChange = (rowsAmount: number) => {
+		setActiveSetting(3);
+		changeRowsAmount(rowsAmount);
+	};
+
 	useEffect(() => {
 		const onKeyDown = (e: KeyboardEvent) => {
 			let newActiveSetting = activeSetting;
-			if (activeSetting < 3 && (e.key === "s" || e.key === "ArrowDown")) newActiveSetting++;
-			if (activeSetting === 3 && (e.key === "s" || e.key === "ArrowDown")) newActiveSetting = 0;
+			if (activeSetting < 4 && (e.key === "s" || e.key === "ArrowDown")) newActiveSetting++;
+			if (activeSetting === 4 && (e.key === "s" || e.key === "ArrowDown")) newActiveSetting = 0;
 			if (activeSetting > 0 && (e.key === "w" || e.key === "ArrowUp")) newActiveSetting--;
-			if (activeSetting === 0 && (e.key === "w" || e.key === "ArrowUp")) newActiveSetting = 3;
+			if (activeSetting === 0 && (e.key === "w" || e.key === "ArrowUp")) newActiveSetting = 4;
 			setActiveSetting(newActiveSetting);
 		};
 
@@ -78,8 +92,13 @@ const Settings = () => {
 					isActive={activeSetting === 2}
 					onChange={onTurnTimeSliderChange}
 				/>
+				<SettingsSlider
+					content={rowsSliderContent}
+					isActive={activeSetting === 3}
+					onChange={onRowsSliderChange}
+				/>
 			</div>
-			<LanguageButton isActive={activeSetting === 3} />
+			<LanguageButton isActive={activeSetting === 4} />
 		</div>
 	);
 };

@@ -9,7 +9,11 @@ import { reducer as gameReducer, actions as gameActions } from "#/redux/slices/g
 import { clearGameData } from "#/utils/clearGameData";
 
 startAppListening({
-	matcher: isAnyOf(settingsActions.toggleEmptyCells, settingsActions.changeTurnTime),
+	matcher: isAnyOf(
+		settingsActions.toggleEmptyCells,
+		settingsActions.changeTurnTime,
+		settingsActions.changeRowsAmount
+	),
 	effect: clearGameData,
 });
 
@@ -34,6 +38,11 @@ startAppListening({
 });
 
 startAppListening({
+	actionCreator: settingsActions.changeRowsAmount,
+	effect: action => localStorage.setItem("rowsAmount", action.payload),
+});
+
+startAppListening({
 	actionCreator: gameActions.initializeGame,
 	effect: action => localStorage.setItem("cipher", JSON.stringify(action.payload.cipher)),
 });
@@ -47,6 +56,10 @@ startAppListening({
 startAppListening({
 	actionCreator: gameActions.confirmRow,
 	effect: (action, listenerApi) => {
+		if (listenerApi.getState().game.activeCell.row >= listenerApi.getState().settings.rowsAmount) {
+			listenerApi.dispatch(gameActions.reachedLockedRow());
+			return clearGameData();
+		}
 		localStorage.setItem("activeRow", String(listenerApi.getState().game.activeCell.row));
 		if (listenerApi.getState().game.isGameOver) clearGameData();
 	},

@@ -9,7 +9,8 @@
 		"title": "Настройки",
 		"emptyCellsButton": "Пустые ячейки",
 		"colorNumerationButton": "Нумерация цветов",
-		"turnTimeSlider": "Время на ход: "
+		"turnTimeSlider": "Время на ход: ",
+		"rowsSlider": "Количество рядов: "
 	},
 	"rules": {
 		"title": "Правила",

@@ -9,7 +9,8 @@
 		"title": "Asetukset",
 		"emptyCellsButton": "Tyhjät solut",
 		"colorNumerationButton": "Värien numerointi",
-		"turnTimeSlider": "Käännä aikaa: "
+		"turnTimeSlider": "Käännä aikaa: ",
+		"rowsSlider": "Rivien määrä: "
 	},
 	"rules": {
 		"title": "Säännöt",

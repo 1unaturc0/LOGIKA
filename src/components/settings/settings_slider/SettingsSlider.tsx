@@ -36,7 +36,7 @@ const SettingsSlider = ({ content, isActive, onChange }: ISettingsSliderProps) =
 			const infinityCenter =
 				infinityRef.current !== null
 					? infinityRef.current?.offsetLeft + infinityRef.current?.offsetWidth / 2
-					: maxEnd.getBoundingClientRect().left + maxEnd.offsetWidth;
+					: maxEnd.offsetLeft + maxEnd.offsetWidth / 2;
 
 			const gripRadius = grip.offsetWidth / 2;
 			const minGripLeft = minEnd.offsetWidth / 2 - gripRadius;
@@ -121,7 +121,7 @@ const SettingsSlider = ({ content, isActive, onChange }: ISettingsSliderProps) =
 		const infinityCenter =
 			infinityRef.current !== null
 				? infinityRef.current.offsetLeft + infinityRef.current.offsetWidth / 2
-				: maxEnd.getBoundingClientRect().left + maxEnd.offsetWidth;
+				: maxEnd.offsetLeft + maxEnd.offsetWidth / 2;
 
 		const gripRadius = grip.offsetWidth / 2;
 		const minGripLeft = minEnd.offsetWidth / 2 - gripRadius;
