@@ -9,7 +9,8 @@
 		"title": "Settings",
 		"emptyCellsButton": "Empty cells",
 		"colorNumerationButton": "Color numeration",
-		"turnTimeSlider": "Turn time: "
+		"turnTimeSlider": "Turn time: ",
+		"rowsSlider": "Rows amount: "
 	},
 	"rules": {
 		"title": "Rules",
